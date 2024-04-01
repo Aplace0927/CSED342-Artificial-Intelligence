@@ -232,7 +232,11 @@ def AStarMazeSearch(
     )
 
     # BEGIN_YOUR_CODE (our solution is 13 lines of code, but don't worry if you deviate from this)
-    return len(ucs.actions)
+    x, y, cost = start[0], start[1], 0
+    for action in ucs.actions:
+        cost += moveCost((x, y), action)
+        x, y = x + util.directions[action][0], y + util.directions[action][1]
+    return cost
     # END_YOUR_CODE
 
 
