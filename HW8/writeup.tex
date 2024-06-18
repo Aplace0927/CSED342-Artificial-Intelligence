@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+
+\begin{document}
+
+\begin{center}
+{\Large CSED342 Assignment 8 \vspace{10pt}}
+
+\begin{tabular}{rl}
+Student ID: & 20220140 \\
+Name: & Taeyeon Kim \\
+\end{tabular}
+\end{center}
+
+\begin{center}
+By turning in this assignment, I agree by the POSTECH honor code and declare that all of this is my own work.
+\end{center}
+
+\section*{Problem 2a}
+
+First, our knowledge $KB$ base is constructed of
+\[
+KB = \{(A \lor B) \implies \lnot C, \lnot (\lnot A \lor C) \implies D, A \}
+\]
+
+Convert each knowledge in $KB$ into CNF with using $\frac{P \implies Q}{\lnot P \lor Q}$, therefore we earn
+\[
+KB = \{(A \lor B) \implies \lnot C, \lnot A \lor C \lor D, A \}
+\]
+
+Rewrite using $\frac{\lnot P \lor Q}{P \implies Q}$,
+\[
+KB = \{(A \lor B) \implies \lnot C, A \implies (C \lor D), A \}
+\]
+
+Apply Modus Ponens to $A \implies (C \lor D)$ with $A$,
+\[
+KB = \{(A \lor B) \implies \lnot C, (C \lor D), A \}
+\]
+
+Apply Modus Ponens to $(A \lor B) \implies \lnot C$ with $A$,
+\[
+KB = \{\lnot C, (C \lor D), A \}
+\]
+
+\because $A \in KB$, $A$ is always true, therefore disjuction with any variable would return true.
+
+
+Finally $\lnot C \in KB$ and $C \land D \in KB$, $C$ is always false. However by $C \lor D$, at least one of $C$ or $D$ must be true.
+Therefore $D$ is true, \textbf{D} satisfies.
+
+\null\hfill\square
+
+
+\section*{Problem 2b}
+
+
+Given knowledge base is following
+\[
+KB = \{A \lor B, B \implies C, (A \lor C) \implies D \}
+\]
+
+Convert $B \implies C$ into CNF.
+
+\[
+KB = \{A \lor B, \lnot B \lor C, (A \lor C) \implies D \}
+\]
+
+Convert $(A \lor C) \implies D$ into CNF.
+\[
+KB = \{A \lor B, \lnot B \lor C, \lnot (A \lor C) \lor D \}
+\]
+
+Apply De Morgan's law into $\lnot (A \lor C) \lor D$.
+\[
+KB = \{A \lor B, \lnot B \lor C, (\lnot A \land \lnot C) \lor D \}
+\]
+
+Apply Distributive law into $(\lnot A \land \lnot C) \lor D$.
+\[
+KB = \{A \lor B, \lnot B \lor C, (\lnot A \lor D) \land (\lnot C \lor D) \}
+\]
+
+Split $(\lnot A \lor D) \land (\lnot C \lor D)$ into 2 constraints.
+\[
+KB = \{A \lor B, \lnot B \lor C, \lnot A \lor D, \lnot C \lor D \}
+\]
+
+Use resolution rule with $A \lor B$ and $\lnot B \lor C$.
+\[
+KB = \{A \lor C, \lnot A \lor D, \lnot C \lor D \}
+\]
+
+Use resolution rule with $A \lor C$ and $\lnot C \lor D$.
+\[
+KB = \{\lnot A \lor D, A \lor D \}
+\]
+
+Use resolution rule with $\lnot A \lor D$ and $A \lor D$.
+\[
+KB = \{ D \}
+\]
+
+Therefore $D$ is true, \textbf{D} satisfies. \\
+\null\hfill\square
+\end{document}
